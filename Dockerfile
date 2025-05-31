@@ -5,10 +5,14 @@ from php:8.1-apache
 run apt-get update && apt-get install -y \
     libicu-dev \
     libzip-dev \
+    libjpeg-dev \
+    libpng-dev \
+    libfreetype6-dev \
     unzip \
     git \
     zip \
-    && docker-php-ext-install intl pdo pdo_mysql zip
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install intl pdo pdo_mysql zip gd
 
 # Ativar mod_rewrite do Apache
 run a2enmod rewrite
